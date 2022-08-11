@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wedding Invitation Designer</title>
+    <link href="./css/style.css" rel="stylesheet">
+
+    <style>
+        @media print {
+            #myPrntbtn {
+                display: none;
+            }
+        }
+
+        @media print {
+            @page {
+                margin: 0;
+            }
+
+            body {
+                margin: 1.6cm;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="py-2 bg-light border-bottom">
+        <div class="container d-flex flex-wrap">
+            <ul class="nav me-auto">
+                <li class="nav-item"><a href="javascript:void(0)" class="nav-link link-dark px-2 active"
+                        aria-current="page">Logo</a>
+                </li>
+            </ul>
+            <ul class="nav">
+                <li class="nav-item"><a href="javascript:void(0)" class="nav-link link-dark px-2">Menu</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <br> <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-12 border border-primary border-2 rounded-2 p-4">
+                <form class="row g-3" id="form">
+                    <div class="col-md-12">
+                        <label for="fname" class="form-label">Select your design:</label>
+                        <select class="form-select" id="design_select" onchange="designSelectOnchage()">
+                            <option>----select----</option>
+                            <option value="design_one">Design One</option>
+                            <option value="design_two">Design Two</option>
+                            <option value="design_three">Design Three</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="fname" class="form-label">First name of bride:</label>
+                        <input type="text" class="form-control" onkeyup="firstNameBride(this.value)">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="fname" class="form-label">First name of groome:</label>
+                        <input type="text" class="form-control" onkeyup="firstNameGroome(this.value)">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="message" class="form-label">Message:</label>
+                        <textarea class="form-control" rows="3" onkeyup="getMessageValue(this.value)"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="date" class="form-label">Date:</label>
+                        <input type="date" class="form-control" onchange="getDateInput(this.value)">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="venu_address" class="form-label">Venu Address:</label>
+                        <textarea class="form-control" rows="3" onkeyup="getVenuAddress(this.value)"></textarea>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="button" onclick="myFormReset()" class="btn btn-primary">Reset</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-6 offset-md-1 border border-primary border-2 rounded-2 p-4" id="right_content_id">
+
+                <div class="col-md-12">
+                    <div class="display_first_name_bride">
+                        <p style=" margin-top: 150px; text-align: center; color: #d23331; font-family: Brush Script MT, cursive; font-size: 26px; font-style: normal; font-variant: normal; font-weight: 700;"
+                            id="display_first_name_bride"></p>
+                    </div>
+
+                    <div
+                        style="margin-top: 15px; text-align: center; color: #d23331; font-family: Brush Script MT, cursive; font-size: 26px; font-style: normal; font-variant: normal; font-weight: 700;">
+                        <p id="showAnd"></p>
+                    </div>
+
+                    <div class="display_first_name_groome">
+                        <p style="margin-top: 15px; word-break: break-all; text-align: center; color: #d23331; font-family: Brush Script MT, cursive; font-size: 26px; font-style: normal; font-variant: normal; font-weight: 700;"
+                            id="display_first_name_groome"></p>
+                    </div>
+
+                    <div class="display_message">
+                        <p style="text-align: center; word-break: break-all; font-family: Brush Script MT, cursive; font-size: 22px; font-style: normal; font-variant: normal; font-weight: 700;"
+                            id="display_message"></p>
+                    </div>
+
+                    <div class="display_date"
+                        style="text-align: center; word-break: break-all; font-family: Brush Script MT, cursive; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700;">
+                        <p id="display_date"></p>
+                    </div>
+
+                    <br>
+                    <div class="display_venu_address"
+                        style="word-break: break-all; text-align: center; font-family: Brush Script MT, cursive; font-size: 24px; font-style: normal; font-variant: normal; font-weight: 700;">
+                        <p id="display_venu_address"></p>
+                    </div>
+
+                    <button type="button" id="myPrntbtn" onclick="printDiv('right_content_id')" class="btn btn-primary">Print</button>
+
+                </div>
+                <!-- <div class="col-12">
+                    <button type="button" style="position: fixed; bottom: 0px; right: 0px; "
+                        onclick="printDiv('right_content_id')" class="btn btn-primary">Print</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <br> <br>
+    <div class="container">
+        <footer class="py-5">
+            <div class="row">
+                <div class="col-6 col-md-4 mb-3">
+                    <h4>Logo</h4>
+                    <h6>Contact Information</h6>
+                </div>
+
+                <div class="col-6 col-md-4 mb-3">
+                    <h5>Menu</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="javascript:void(0)" class="nav-link p-0 text-muted">Home</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="javascript:void(0)"
+                                class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="javascript:void(0)" class="nav-link p-0 text-muted">FAQs</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="javascript:void(0)" class="nav-link p-0 text-muted">About</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-4 mb-3">
+                    <h5>Social Link</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="javascript:void(0)"
+                                class="nav-link p-0 text-muted">Facebook</a></li>
+                        <li class="nav-item mb-2"><a href="javascript:void(0)"
+                                class="nav-link p-0 text-muted">Instagram</a></li>
+                        <li class="nav-item mb-2"><a href="javascript:void(0)"
+                                class="nav-link p-0 text-muted">Twitter</a></li>
+                        <li class="nav-item mb-2"><a href="javascript:void(0)"
+                                class="nav-link p-0 text-muted">Linkedin</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-center py-4 my-4 border-top">
+                <p>&copy; 2022 Wedding Invitation Designer, Inc. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+
+        function myFormReset() {
+            document.getElementById("form").reset();
+            window.location.reload();
+        }
+
+        function designSelectOnchage() {
+
+            var showDesign = document.getElementById("right_content_id");
+            var designValue = document.getElementById("design_select").value;
+
+            if (designValue === 'design_one') {
+
+                showDesign.style.display = "block";
+                // showDesign.style.objectFit = "fill";
+                showDesign.style.backgroundImage = 'url(image/flower-gbd1106b70_1920.jpg)';
+                showDesign.style.backgroundRepeat = "no-repeat";
+                // showDesign.style.backgroundAttachment = "fixed";
+                showDesign.style.backgroundSize = "100% 100%";
+
+            } else if (designValue === 'design_two') {
+                showDesign.style.display = "block";
+                showDesign.style.background = 'url(image/two.jpeg)';
+                // showDesign.style.width = '687px';
+                showDesign.style.backgroundRepeat = "no-repeat";
+                showDesign.style.backgroundSize = "100% 100%";
+            }
+            else if (designValue === 'design_three') {
+                showDesign.style.display = "block";
+                showDesign.style.background = 'url(image/one.jpeg)';
+                showDesign.style.backgroundRepeat = "no-repeat";
+                showDesign.style.backgroundSize = "100% 100%";
+            }
+            else {
+                showDesign.style.display = "none";
+            }
+        }
+
+        function firstNameBride(value) {
+            document.getElementById("display_first_name_bride").innerHTML = value;
+        }
+
+        function firstNameGroome(value) {
+            document.getElementById("display_first_name_groome").innerHTML = value;
+            document.getElementById("showAnd").innerHTML = '&';
+        }
+
+        function getMessageValue(value) {
+            document.getElementById("display_message").innerHTML = value;
+        }
+
+        function getDateInput(date) {
+            document.getElementById("display_date").innerHTML = "Date: " + date;
+        }
+
+        function getVenuAddress(value) {
+            document.getElementById("display_venu_address").innerHTML = "Venu Address: " + value;
+        }
+
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+
+            window.print();
+
+            document.body.innerHTML = originalContents;
+        }
+
+    </script>
+
+
+</body>
+
+</html>
